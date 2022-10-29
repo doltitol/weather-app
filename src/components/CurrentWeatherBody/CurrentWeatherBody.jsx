@@ -15,7 +15,20 @@ const CurrentWeatherBody = (props) => {
                         <div className="col-sm-6">
                             <div className="row">
                                 <div className="col-md-6"></div>
-                                <div className="col-md-6 weather-details d-flex flex-column align-items-start"></div>
+                                <div className="col-md-6 weather-details d-flex flex-column align-items-start">
+                                    <p>
+                                        <strong>Pressure: </strong>
+                                        { props.pressure }hPa
+                                    </p>
+                                    <p>
+                                        <strong>Humidity: </strong>
+                                        { props.humidity }%
+                                    </p>
+                                    <p>
+                                        <strong>Wind: </strong>
+                                        { props.wind }metre/sec
+                                    </p>
+                                </div>
                             </div>
                         </div>
                         <div className="col-sm-6 d-flex align-items-center justify-content-center">
