@@ -11,6 +11,16 @@ const CurrentWeatherBody = (props) => {
                             { props.city }, <strong>{ props.country }</strong>
                         </h2>
                     </div>
+                    <div className="row">
+                        <div className="col-sm-6 d-flex align-items-center justify-content-center">
+                            <img
+                                src={ `http://openweathermap.org/img/wn/${ props.icon }@2x.png` }
+                                alt={ props.desc }
+                                id="icon-current"
+                                className="img-fluid"
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
