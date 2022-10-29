@@ -1,0 +1,11 @@
+.weather {
+    margin-top: 20px;
+    background: linear-gradient(109.6deg,
+            rgb(136, 199, 244) 11.2%,
+            rgb(147, 199, 250) 91.1%);
+    transition: all 0.7s ease-in-out;
+}
+
+.weather:hover {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
