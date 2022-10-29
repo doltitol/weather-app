@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./CurrentWeatherBody.css";
 
 const CurrentWeatherBody = (props) => {
+    const [ isCelsiusActive, setIsCelsiusActive ] = useState(true);
+    const [ isFarenheitActive, setIsFarenheitActive ] = useState(false);
+
+    const handleCelsiusClick = () => {
+        setIsCelsiusActive(!isCelsiusActive);
+        setIsFarenheitActive(!isFarenheitActive);
+    }
+    const handleFarenheitClick = () => {
+        setIsCelsiusActive(!isCelsiusActive);
+        setIsFarenheitActive(!isFarenheitActive);
+    }
     return (
         <div className="card-body">
             <div className="row">
@@ -14,7 +25,20 @@ const CurrentWeatherBody = (props) => {
                     <div className="row">
                         <div className="col-sm-6">
                             <div className="row">
-                                <div className="col-md-6"></div>
+                                <div className="col-md-6">
+                                    <h1>
+                                        { props.temperature }
+                                        <span id="temp-type">
+                                            <span className={ isCelsiusActive ? 'active' : null } onClick={ handleCelsiusClick }>°C</span>
+                                            { " " }
+                                            |
+                                            <span className={ isFarenheitActive ? 'active' : null } onClick={ handleFarenheitClick }>°F</span>
+                                        </span>
+                                    </h1>
+                                    <div>
+                                        <h4 id="weather-desc">{ props.desc }</h4>
+                                    </div>
+                                </div>
                                 <div className="col-md-6 weather-details d-flex flex-column align-items-start">
                                     <p>
                                         <strong>Pressure: </strong>

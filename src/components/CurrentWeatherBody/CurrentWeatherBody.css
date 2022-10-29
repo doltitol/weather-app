@@ -4,13 +4,13 @@
     top: -35px;
 }
 
-#temp-type a {
+#temp-type span {
     text-decoration: none;
     cursor: pointer;
     color: #2772db;
 }
 
-#temp-type a.active {
+#temp-type span.active {
     text-decoration: none;
     cursor: pointer;
     color: #070f4e;
