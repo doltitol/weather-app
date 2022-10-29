@@ -1,6 +1,6 @@
 # Weather App
 
-This project can be viewed at [React Weather App](https://635d45516d441576f85ae0bc--zingy-torrone-c261a8.netlify.app/).
+This project can be viewed at [React Weather App](https://zingy-torrone-c261a8.netlify.app/).
 
 ## Available Scripts
 

@@ -1,8 +1,8 @@
-
+import WeatherContainer from "./components/WeatherContainer/WeatherContainer";
 function App() {
   return (
     <div className="container">
-      Hello
+      <WeatherContainer />
     </div>
   );
 }
