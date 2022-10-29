@@ -1,7 +1,7 @@
 import React from 'react';
-import Search from './Search/Search';
+import Search from '../Search/Search';
 // import CurrentWeatherContainer from '../CurrentWeatherContainer/CurrentWeatherContainer';
-// import Footer from '../Footer/Footer';
+import Footer from '../Footer/Footer';
 // import Forecast from '../Forecast/Forecast';
 // import Search from '../Search/Search';
 import './WeatherContainer.css';
@@ -16,7 +16,7 @@ const WeatherContainer = () => {
                     </div>
                 </div>
             </div>
-            {/* <Footer /> */ }
+            <Footer />
         </div>
     )
 }
