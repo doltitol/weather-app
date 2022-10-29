@@ -1,9 +1,7 @@
 import React from 'react';
 import Search from '../Search/Search';
-// import CurrentWeatherContainer from '../CurrentWeatherContainer/CurrentWeatherContainer';
 import Footer from '../Footer/Footer';
-// import Forecast from '../Forecast/Forecast';
-// import Search from '../Search/Search';
+import Forecast from '../Forecast/Forecast';
 import './WeatherContainer.css';
 import CurrentWeatherContainer from '../CurrentWeatherContainer/CurrentWeatherContainer';
 
@@ -15,6 +13,7 @@ const WeatherContainer = () => {
                     <div className="card-top">
                         <Search />
                         <CurrentWeatherContainer />
+                        <Forecast />
                     </div>
                 </div>
             </div>
