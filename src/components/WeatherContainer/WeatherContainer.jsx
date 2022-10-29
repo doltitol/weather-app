@@ -5,6 +5,7 @@ import Footer from '../Footer/Footer';
 // import Forecast from '../Forecast/Forecast';
 // import Search from '../Search/Search';
 import './WeatherContainer.css';
+import CurrentWeatherContainer from '../CurrentWeatherContainer/CurrentWeatherContainer';
 
 const WeatherContainer = () => {
     return (
@@ -13,6 +14,7 @@ const WeatherContainer = () => {
                 <div className="card-body">
                     <div className="card-top">
                         <Search />
+                        <CurrentWeatherContainer />
                     </div>
                 </div>
             </div>
