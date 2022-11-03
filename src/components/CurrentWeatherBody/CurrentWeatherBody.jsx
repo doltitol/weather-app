@@ -60,7 +60,8 @@ const CurrentWeatherBody = (props) => {
                         </div>
                         <div className="col-sm-6 d-flex align-items-center justify-content-center">
                             <img
-                                src={ `https://openweathermap.org/img/wn/${ icon }@2x.png` }
+                                // src={ `https://openweathermap.org/img/wn/${ icon }@2x.png` }
+                                src={ `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${ icon }.png` }
                                 alt={ description }
                                 id="icon-current"
                                 className="img-fluid"

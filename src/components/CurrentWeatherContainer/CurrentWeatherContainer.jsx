@@ -30,21 +30,22 @@ const CurrentWeatherContainer = () => {
         setCity(event.target.value);
     };
     const getCityName = (response) => {
-        searchCity(unit, response.data.name);
+        searchCity(unit, response.data.city);
     };
     const getCityInfo = (response) => {
-        setCity(response.data.name);
+        console.log(response.data);
+        setCity(response.data.city);
         setCityDetails({
             loading: false,
-            city: response.data.name,
-            country: response.data.sys.country,
-            description: response.data.weather[ 0 ].description,
-            icon: response.data.weather[ 0 ].icon,
-            temperature: Math.round(response.data.main.temp),
-            humidity: response.data.main.humidity,
-            pressure: response.data.main.pressure,
+            city: response.data.city,
+            country: response.data.country,
+            description: response.data.condition.description,
+            icon: response.data.condition.icon,
+            temperature: Math.round(response.data.temperature.current),
+            humidity: response.data.temperature.humidity,
+            pressure: response.data.temperature.pressure,
             wind: response.data.wind.speed,
-            date: new Date(response.data.dt * 1000)
+            date: new Date(response.data.time * 1000)
         });
 
     };
@@ -57,15 +58,19 @@ const CurrentWeatherContainer = () => {
         searchCity('imperial', city);
     };
     function searchCity(unit, city) {
-        const apiKey = "cf25d8eb42806c8d7039bbac5d23b349";
-        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${ city }&appid=${ apiKey }&units=${ unit }`;
+        // const apiKey = "cf25d8eb42806c8d7039bbac5d23b349";
+        const apiKey = 'aa04f9t2644ab7acc0ced1o03b410700';
+        // const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${ city }&appid=${ apiKey }&units=${ unit }`;
+        const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${ city }&key=${ apiKey }&units=${ unit }`;
         axios.get(apiUrl).then(getCityInfo);
     }
     function getLocation(position) {
-        const apiKey = "cf25d8eb42806c8d7039bbac5d23b349";
+        // const apiKey = "cf25d8eb42806c8d7039bbac5d23b349";
+        const apiKey = 'aa04f9t2644ab7acc0ced1o03b410700';
         const longitude = position.coords.longitude;
         const latitude = position.coords.latitude;
-        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${ latitude }&lon=${ longitude }&appid=${ apiKey }&units=metric`;
+        // const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${ latitude }&lon=${ longitude }&appid=${ apiKey }&units=metric`;
+        const apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${ longitude }&lat=${ latitude }&key=${ apiKey }&units=${ unit }`;
         axios.get(apiUrl).then(getCityName);
     }
     function getCurrentLocation() {
