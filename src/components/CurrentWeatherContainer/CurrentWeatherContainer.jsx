@@ -6,7 +6,8 @@ import { BallTriangle } from 'react-loader-spinner';
 import axios from 'axios';
 
 const CurrentWeatherContainer = () => {
-    const [ city, setCity ] = useState();
+    const [ city, setCity ] = useState('');
+    const [ unit, setUnit ] = useState('metric');
     const [ cityDetails, setCityDetails ] = useState({
         loading: true,
         city: '',
@@ -21,9 +22,13 @@ const CurrentWeatherContainer = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        searchCity(unit, city);
     };
     const handleCityChange = (event) => {
         setCity(event.target.value);
+    };
+    const getCityName = (response) => {
+        searchCity(unit, response.data.name);
     };
     const getCityInfo = (response) => {
         setCity(response.data.name);
@@ -41,12 +46,14 @@ const CurrentWeatherContainer = () => {
 
     };
     const handleCelsiusChange = () => {
-        searchCity('metric');
+        setUnit('metric');
+        searchCity('metric', city);
     };
     const handleFahrenheitChange = () => {
-        searchCity('imperial');
+        setUnit('imperial');
+        searchCity('imperial', city);
     };
-    function searchCity(unit) {
+    function searchCity(unit, city) {
         const apiKey = "cf25d8eb42806c8d7039bbac5d23b349";
         const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${ city }&appid=${ apiKey }&units=${ unit }`;
         axios.get(apiUrl).then(getCityInfo);
@@ -56,7 +63,7 @@ const CurrentWeatherContainer = () => {
         const longitude = position.coords.longitude;
         const latitude = position.coords.latitude;
         const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${ latitude }&lon=${ longitude }&appid=${ apiKey }&units=metric`;
-        axios.get(apiUrl).then(getCityInfo);
+        axios.get(apiUrl).then(getCityName);
     }
     function getCurrentLocation() {
         navigator.geolocation.getCurrentPosition(getLocation);
