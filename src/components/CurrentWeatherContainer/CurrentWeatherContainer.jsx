@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import CurrentWeatherBody from '../CurrentWeatherBody/CurrentWeatherBody';
-import CurrentWeatherHeader from '../CurrentWeatherHeader/CurrentWeatherHeader';
 import "./CurrentWeatherContainer.css";
 import { BallTriangle } from 'react-loader-spinner';
+import FormatDate from '../FormatDate/FormatDate';
 import axios from 'axios';
 
 const CurrentWeatherContainer = () => {
@@ -17,11 +17,13 @@ const CurrentWeatherContainer = () => {
         temperature: '',
         humidity: '',
         pressure: '',
-        wind: ''
+        wind: '',
+        date: ''
     });
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setCityDetails({ ...cityDetails, loading: false });
         searchCity(unit, city);
     };
     const handleCityChange = (event) => {
@@ -41,7 +43,8 @@ const CurrentWeatherContainer = () => {
             temperature: Math.round(response.data.main.temp),
             humidity: response.data.main.humidity,
             pressure: response.data.main.pressure,
-            wind: response.data.wind.speed
+            wind: response.data.wind.speed,
+            date: new Date(response.data.dt * 1000)
         });
 
     };
@@ -109,7 +112,7 @@ const CurrentWeatherContainer = () => {
                 </button>
             </form>
             <div className="card weather">
-                <CurrentWeatherHeader day="Thursday" time="11:00" />
+                <FormatDate date={ cityDetails.date } />
                 <CurrentWeatherBody data={ cityDetails } handleCelsiusChange={ handleCelsiusChange } handleFahrenheitChange={ handleFahrenheitChange } />
             </div>
         </div>;
