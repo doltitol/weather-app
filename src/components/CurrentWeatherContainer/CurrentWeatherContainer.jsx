@@ -1,23 +1,113 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CurrentWeatherBody from '../CurrentWeatherBody/CurrentWeatherBody';
 import CurrentWeatherHeader from '../CurrentWeatherHeader/CurrentWeatherHeader';
-import "./CurrentWeatherContainer.css"
+import "./CurrentWeatherContainer.css";
+import { BallTriangle } from 'react-loader-spinner';
+import axios from 'axios';
 
 const CurrentWeatherContainer = () => {
-    return (
-        <div className="card weather">
-            <CurrentWeatherHeader day="Thursday" time="11:00" />
-            <CurrentWeatherBody
-                city="Lagos"
-                country="NG"
-                desc="Light rain"
-                temperature={ 30 }
-                pressure={ 1012 }
-                humidity={ 98 }
-                wind={ 2 }
-                icon="10d" />
-        </div>
-    )
-}
+    const [ city, setCity ] = useState();
+    const [ cityDetails, setCityDetails ] = useState({
+        loading: true,
+        city: '',
+        country: '',
+        description: '',
+        icon: '',
+        temperature: '',
+        humidity: '',
+        pressure: '',
+        wind: ''
+    });
 
-export default CurrentWeatherContainer
+    const handleSubmit = (event) => {
+        event.preventDefault();
+    };
+    const handleCityChange = (event) => {
+        setCity(event.target.value);
+    };
+    const getCityInfo = (response) => {
+        setCity(response.data.name);
+        setCityDetails({
+            loading: false,
+            city: response.data.name,
+            country: response.data.sys.country,
+            description: response.data.weather[ 0 ].description,
+            icon: response.data.weather[ 0 ].icon,
+            temperature: Math.round(response.data.main.temp),
+            humidity: response.data.main.humidity,
+            pressure: response.data.main.pressure,
+            wind: response.data.wind.speed
+        });
+
+    };
+    const handleCelsiusChange = () => {
+        searchCity('metric');
+    };
+    const handleFahrenheitChange = () => {
+        searchCity('imperial');
+    };
+    function searchCity(unit) {
+        const apiKey = "cf25d8eb42806c8d7039bbac5d23b349";
+        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${ city }&appid=${ apiKey }&units=${ unit }`;
+        axios.get(apiUrl).then(getCityInfo);
+    }
+    function getLocation(position) {
+        const apiKey = "cf25d8eb42806c8d7039bbac5d23b349";
+        const longitude = position.coords.longitude;
+        const latitude = position.coords.latitude;
+        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${ latitude }&lon=${ longitude }&appid=${ apiKey }&units=metric`;
+        axios.get(apiUrl).then(getCityInfo);
+    }
+    function getCurrentLocation() {
+        navigator.geolocation.getCurrentPosition(getLocation);
+    }
+    if (cityDetails.loading) {
+        getCurrentLocation();
+        return <div style={ { textAlign: 'center' } }>
+            <form id="search-form" onSubmit={ handleSubmit }>
+                <input
+                    type="search"
+                    id="search"
+                    aria-label="search"
+                    placeholder="Search City..."
+                    onChange={ handleCityChange }
+                />
+                <button type="submit" className="search-icon">
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </form>
+            <BallTriangle
+                height={ 100 }
+                width={ 100 }
+                radius={ 5 }
+                color={ 'rgb(55, 154, 224)' }
+                ariaLabel="ball-triangle-loading"
+                wrapperClass="loader"
+                wrapperStyle=""
+                visible={ true }
+            />
+        </div>;
+    } else {
+        return <div>
+            <form id="search-form" onSubmit={ handleSubmit }>
+                <input
+                    type="search"
+                    id="search"
+                    aria-label="search"
+                    placeholder="Search City..."
+                    onChange={ handleCityChange }
+                />
+                <button type="submit" className="search-icon">
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </form>
+            <div className="card weather">
+                <CurrentWeatherHeader day="Thursday" time="11:00" />
+                <CurrentWeatherBody data={ cityDetails } handleCelsiusChange={ handleCelsiusChange } handleFahrenheitChange={ handleFahrenheitChange } />
+            </div>
+        </div>;
+    }
+
+};
+
+export default CurrentWeatherContainer;

@@ -6,12 +6,7 @@
 
 body {
   padding: 60px 0;
-  background: linear-gradient(109.6deg,
-      rgb(223, 234, 247) 11.2%,
-      rgb(244, 248, 252) 91.1%);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
+  background: #deeaf6;
   font-family: "Open Sans", sans-serif;
   height: 100vh;
 }
