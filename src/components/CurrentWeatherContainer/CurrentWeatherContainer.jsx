@@ -33,7 +33,6 @@ const CurrentWeatherContainer = () => {
         searchCity(unit, response.data.city);
     };
     const getCityInfo = (response) => {
-        console.log(response.data);
         setCity(response.data.city);
         setCityDetails({
             loading: false,
@@ -58,18 +57,14 @@ const CurrentWeatherContainer = () => {
         searchCity('imperial', city);
     };
     function searchCity(unit, city) {
-        // const apiKey = "cf25d8eb42806c8d7039bbac5d23b349";
         const apiKey = 'aa04f9t2644ab7acc0ced1o03b410700';
-        // const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${ city }&appid=${ apiKey }&units=${ unit }`;
         const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${ city }&key=${ apiKey }&units=${ unit }`;
         axios.get(apiUrl).then(getCityInfo);
     }
     function getLocation(position) {
-        // const apiKey = "cf25d8eb42806c8d7039bbac5d23b349";
         const apiKey = 'aa04f9t2644ab7acc0ced1o03b410700';
         const longitude = position.coords.longitude;
         const latitude = position.coords.latitude;
-        // const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${ latitude }&lon=${ longitude }&appid=${ apiKey }&units=metric`;
         const apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${ longitude }&lat=${ latitude }&key=${ apiKey }&units=${ unit }`;
         axios.get(apiUrl).then(getCityName);
     }
