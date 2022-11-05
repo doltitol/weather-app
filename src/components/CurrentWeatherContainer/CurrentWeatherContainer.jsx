@@ -4,6 +4,7 @@ import "./CurrentWeatherContainer.css";
 import { BallTriangle } from 'react-loader-spinner';
 import FormatDate from '../FormatDate/FormatDate';
 import axios from 'axios';
+import Forecast from '../Forecast/Forecast';
 
 const CurrentWeatherContainer = () => {
     const [ city, setCity ] = useState('');
@@ -115,9 +116,9 @@ const CurrentWeatherContainer = () => {
                 <FormatDate date={ cityDetails.date } />
                 <CurrentWeatherBody data={ cityDetails } handleCelsiusChange={ handleCelsiusChange } handleFahrenheitChange={ handleFahrenheitChange } />
             </div>
+            <Forecast city={ cityDetails.city } unit={ unit } />
         </div>;
     }
-
 };
 
 export default CurrentWeatherContainer;

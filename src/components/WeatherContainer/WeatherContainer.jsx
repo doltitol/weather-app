@@ -1,6 +1,5 @@
 import React from 'react';
 import Footer from '../Footer/Footer';
-// import Forecast from '../Forecast/Forecast';
 import './WeatherContainer.css';
 import CurrentWeatherContainer from '../CurrentWeatherContainer/CurrentWeatherContainer';
 
@@ -11,7 +10,6 @@ const WeatherContainer = () => {
                 <div className="card-body">
                     <div className="card-top">
                         <CurrentWeatherContainer />
-                        {/* <Forecast /> */ }
                     </div>
                 </div>
             </div>
